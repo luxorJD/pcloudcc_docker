@@ -18,6 +18,9 @@ RUN apt-get update \
        build-essential \
        git \
        make \
+       python3 \
+       python3-pip \
+       python3-venv \
        ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
@@ -25,6 +28,18 @@ WORKDIR /usr/src
 
 # Pin the repo to the latest tested commit.
 ARG console_client_sha=4b42e3c8a90696ca9ba0a7e162fcbcd62ad2e306
+
+RUN cd /usr/src \
+  && git clone https://github.com/Mbed-TLS/mbedtls \
+  && cd mbedtls \
+  && git checkout tags/v3.6.2 \
+  && git submodule update --init \
+  && python3 -m venv ./venv \
+  && source ./venv/bin/activate \
+  && python3 -m pip install -r scripts/basic.requirements.txt \
+  && make \
+  && make install \
+  && ln -s /usr/local/include/mbedtls/ /usr/local/include/mbedtls3
 
 RUN cd /usr/src \
     && git clone https://github.com/luxorJD/pcloudcc-lneely \
