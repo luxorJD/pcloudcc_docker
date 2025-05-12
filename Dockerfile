@@ -34,9 +34,9 @@ RUN cd /usr/src \
   && cd mbedtls \
   && git checkout tags/v3.6.2 \
   && git submodule update --init \
-  && python3 -m venv ./venv \
+  && /usr/bin/python3 -m venv ./venv \
   && source ./venv/bin/activate \
-  && python3 -m pip install -r scripts/basic.requirements.txt \
+  && /usr/bin/python3 -m pip install -r scripts/basic.requirements.txt \
   && make \
   && make install \
   && ln -s /usr/local/include/mbedtls/ /usr/local/include/mbedtls3
