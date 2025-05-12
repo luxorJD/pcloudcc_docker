@@ -3,8 +3,8 @@ help:
 	@echo Run 'make build' to build the docker image locally
 	@echo Run 'env PCLOUD_USERNAME="<pcloud_user>" PCLOUD_SECRET=<secret> make test' to run a basic functionality test
 
-PLATFORM := linux/arm64
-REPOSITORY := jloyola/pcloudcc
+PLATFORM := linux/amd64
+REPOSITORY := lneely/pcloudcc-lneely
 LABEL := dev
 IMAGE_NAME := $(REPOSITORY):$(LABEL)
 
