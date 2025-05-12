@@ -18,9 +18,6 @@ RUN apt-get update \
        build-essential \
        git \
        make \
-       python3 \
-       python3-pip \
-       python3-venv \
        ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
@@ -30,27 +27,13 @@ WORKDIR /usr/src
 ARG console_client_sha=4b42e3c8a90696ca9ba0a7e162fcbcd62ad2e306
 
 RUN cd /usr/src \
-  && git clone https://github.com/Mbed-TLS/mbedtls \
-  && cd mbedtls \
-  && git checkout tags/v3.6.2 \
-  && git submodule update --init 
+    && git clone https://github.com/pcloudcom/console-client \
+    && cd console-client \
+    && git reset --hard ${console_client_sha} \
+    && git fetch https://github.com/pcloudcom/console-client pull/163/head:mfa_branch \
+    && git checkout mfa_branch
 
-RUN cd /usr/src \
-  && /usr/bin/python3 -m venv ./venv \
-  && source ./venv/bin/activate \
-  && /usr/bin/python3 -m pip install -r scripts/basic.requirements.txt 
-
-RUN cd /usr/src \
-  && make \
-  && make install \
-  && ln -s /usr/local/include/mbedtls/ /usr/local/include/mbedtls3
-
-RUN cd /usr/src \
-    && git clone https://github.com/luxorJD/pcloudcc-lneely \
-    && cd pcloudcc-lneely \
-    &&  git fetch https://github.com/luxorJD/pcloudcc-lneely.git
-
-WORKDIR /usr/src/pcloudcc-lneely
+WORKDIR /usr/src/console-client
 # Remove -mtune arg
 # https://github.com/pcloudcom/console-client/issues/175
 ARG TARGETPLATFORM
