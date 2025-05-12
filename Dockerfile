@@ -64,6 +64,8 @@ RUN apt-get update \
 COPY --from=builder /usr/bin/pcloudcc /usr/bin/pcloudcc
 COPY --from=builder /usr/lib/libpcloudcc_lib.so /usr/lib/libpcloudcc_lib.so
 
+COPY fuse.conf /etc/fuse.conf
+
 COPY entrypoint.sh /
 RUN chmod +x /entrypoint.sh
 
