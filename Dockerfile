@@ -30,8 +30,7 @@ RUN cd /usr/src \
     && git clone https://github.com/luxorJD/pcloudcc-lneely \
     && cd pcloudcc-lneely \
     && git reset --hard ${console_client_sha} \
-    &&  git fetch https://github.com/luxorJD/pcloudcc-lneely.git \
-    && git checkout mfa_branch
+    &&  git fetch https://github.com/luxorJD/pcloudcc-lneely.git
 
 WORKDIR /usr/src/pcloudcc-lneely
 # Remove -mtune arg
