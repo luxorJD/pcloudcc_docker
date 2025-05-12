@@ -28,11 +28,8 @@ ARG console_client_sha=4b42e3c8a90696ca9ba0a7e162fcbcd62ad2e306
 
 RUN cd /usr/src \
     && git clone https://github.com/luxorJD/pcloudcc-lneely
-    #&& git clone https://github.com/pcloudcom/console-client \
-    #&& cd console-client \
     && cd pcloudcc-lneely \
     && git reset --hard ${console_client_sha} \
-    #&& git fetch https://github.com/pcloudcom/console-client pull/163/head:mfa_branch \
     &&  git fetch https://github.com/luxorJD/pcloudcc-lneely.git
     && git checkout mfa_branch
 
