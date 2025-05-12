@@ -33,10 +33,14 @@ RUN cd /usr/src \
   && git clone https://github.com/Mbed-TLS/mbedtls \
   && cd mbedtls \
   && git checkout tags/v3.6.2 \
-  && git submodule update --init \
+  && git submodule update --init 
+
+RUN cd /usr/src \
   && /usr/bin/python3 -m venv ./venv \
   && source ./venv/bin/activate \
-  && /usr/bin/python3 -m pip install -r scripts/basic.requirements.txt \
+  && /usr/bin/python3 -m pip install -r scripts/basic.requirements.txt 
+
+RUN cd /usr/src \
   && make \
   && make install \
   && ln -s /usr/local/include/mbedtls/ /usr/local/include/mbedtls3
