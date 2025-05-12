@@ -5,7 +5,7 @@ on:
     tags: [ 'v*' ]
 
 env:
-  DOCKER_HUB_NAMESPACE: jloyola
+  DOCKER_HUB_NAMESPACE: luxorJD
   DOCKER_HUB_REPO: pcloudcc
 
 jobs:
